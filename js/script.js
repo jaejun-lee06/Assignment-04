@@ -2,51 +2,68 @@
 // Created on: April 2022
 // This file contains the JS functions for index.html
 
-
+'use strict'
 
 /**
- * Input
+ * Check servie worker.
  */
-function myButtonClicked() {
-  //input
-  const largePizza = document.getElementById("largePizza").checked;
-  const extraLargePizza = document.getElementById("extraLargePizza");
-  const topping1 = document.getElementById("topping1");
-  const topping2 = document.getElementById("topping2");
-  const topping3 = document.getElementById("topping3").checked;
-  const topping4 = document.getElementById("topping4");
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register("/ICS2O-Assignment-04/sw.js", {
+    scope: "/ICS2O-Assignment-04/",
+  })
+}
 
-  var pizzaPrice = 0;
-  var toppingPrice = 0;
+/**
+ * This function calculates the pizzas total price
+ */
+ function buttonClicked() {
+  var pizzaPrice = 0
+  var toppingPrice = 0
+  var totalPrice = 0
+  var tax = 0
 
-  var tax = 0;
 
-  //process
-  if (largePizza == true) {
-    pizzaPrice = 6.0;
-    document.getElementById("largePizza").innerHTML = "Large Pizza";
+  var largeSize = document.getElementById("largeSize")
+  var extraLagreSize = document.getElementById("extraLagreSize")
+
+  if (largeSize.checked == true) {
+    pizzaPrice = 6.00
+    
   }
-  else if (extraLargePizza == true) pizzaPrice = 10.0;
-  document.getElementById("largePizza").innerHTML = "Extra Large Pizza";
 
-  if (topping1 == true) {
-    toppingPrice = 1.0;
-    document.getElementById("topping1").innerHTML = "One Topping";
-  } else if (topping2 == true) {
-    toppingPrice = 1.75;
-    document.getElementById("topping2").innerHTML = "Two Toppings";
-  } else if (topping3 == true) {
-    toppingPrice = 2.5;
-    document.getElementById("topping3").innerHTML = "Three Toppings";
-  } else {
-    toppingPrice = 3.35;
-    document.getElementById("topping4").innerHTML = "Four Toppings";
-
-    //output
-    tax = (pizzaPrice + toppingPrice) * 0.13;
-    finalPrice = tax + (pizzaPrice + toppingPrice);
-
-    document.getElementById("answers").innerHTML =
-      "Your pizza will be $" + finalPrice.toFixed(2);
+  if (extraLagreSize.checked == true) {
+    pizzaPrice = 10.00
   }
+
+
+  var topping1 = document.getElementById("topping1")
+  var topping2 = document.getElementById("topping2")
+  var topping3 = document.getElementById("topping3")
+  var topping4 = document.getElementById("topping4")
+
+
+  if (topping1.checked == true) {
+    toppingPrice = 1.00
+  }
+
+  if (topping2.checked == true) {
+    toppingPrice = 1.75
+  }
+
+  if (topping3.checked == true) {
+    toppingPrice = 2.50
+  }
+
+  if (topping4.checked == true) {
+    toppingPrice = 3.35
+  }
+
+
+  tax = (pizzaPrice + toppingPrice) * 0.13
+  totalPrice = tax + (pizzaPrice + toppingPrice)
+
+  document.getElementById("order").innerHTML =
+  "Your pizza will cost  $" + totalPrice.toFixed(2)
+
+  console.log(totalPrice)
 }
