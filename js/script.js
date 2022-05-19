@@ -21,6 +21,7 @@ if (navigator.serviceWorker) {
   var toppingPrice = 0
   var totalPrice = 0
   var tax = 0
+  var taxRate = 0.13
 
 
   var largeSize = document.getElementById("largeSize")
@@ -59,7 +60,7 @@ if (navigator.serviceWorker) {
   }
 
 
-  tax = (pizzaPrice + toppingPrice) * 0.13
+  tax = (pizzaPrice + toppingPrice) * taxRate
   totalPrice = tax + (pizzaPrice + toppingPrice)
 
   document.getElementById("order").innerHTML =
